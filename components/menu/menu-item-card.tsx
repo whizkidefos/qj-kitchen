@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { useCart } from '@/hooks/use-cart';
-import { MenuItem } from '@/lib/types';
-import { formatPrice } from '@/lib/utils';
+import { MenuItem } from '@/lib/types/menu';
+import { formatPrice } from '@/lib/utils/price';
 
 interface MenuItemCardProps {
   item: MenuItem;

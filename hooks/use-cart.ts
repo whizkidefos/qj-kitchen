@@ -2,7 +2,9 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartItem, MenuItem } from '@/lib/types';
+import { CartItem } from '@/lib/types/cart';
+import { MenuItem } from '@/lib/types/menu';
+import { calculateDeliveryFee } from '@/lib/utils/price';
 
 interface CartStore {
   items: CartItem[];
@@ -40,6 +42,7 @@ export const useCart = create<CartStore>()(
         }));
       },
       updateQuantity: (itemId, quantity) => {
+        if (quantity < 1) return;
         set((state) => ({
           items: state.items.map((item) =>
             item.id === itemId ? { ...item, quantity } : item
@@ -55,7 +58,7 @@ export const useCart = create<CartStore>()(
       },
       get deliveryFee() {
         const subtotal = get().subtotal;
-        return subtotal >= 2000 ? 0 : 150;
+        return calculateDeliveryFee(subtotal);
       },
       get total() {
         return get().subtotal + get().deliveryFee;

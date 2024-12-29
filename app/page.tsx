@@ -7,31 +7,33 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section - Full Width */}
-      <section className="relative w-full h-[90vh] flex items-center justify-center">
-        <Image
-          src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
-          alt="Delicious food spread"
-          fill
-          className="object-cover brightness-50 z-0"
-          priority
-        />
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-center text-center text-white space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Fresh Home-Cooked Meals <br className="hidden sm:inline" />
-              Delivered to Your Door
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-gray-100">
-              Experience the comfort of home-cooked meals without the hassle. 
-              From daily meals to special events, we've got you covered.
-            </p>
-            <div className="flex gap-4 mt-4">
-              <Button size="lg" className="text-lg px-8" asChild>
-                <Link href="/order">Order Now</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8" asChild>
-                <Link href="/menu">View Menu</Link>
-              </Button>
+      <section className="relative w-full h-[90vh]">
+        <div className="absolute inset-0 w-full h-full">
+          <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+            alt="Delicious food spread"
+            className="w-full h-full object-cover brightness-50"
+          />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center justify-center text-center text-white space-y-6">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+                Fresh Home-Cooked Meals <br className="hidden sm:inline" />
+                Delivered to Your Door
+              </h1>
+              <p className="mx-auto max-w-2xl text-lg sm:text-xl text-gray-100">
+                Experience the comfort of home-cooked meals without the hassle. 
+                From daily meals to special events, we've got you covered.
+              </p>
+              <div className="flex gap-4 mt-4">
+                <Button size="lg" className="text-lg px-8" asChild>
+                  <Link href="/order">Order Now</Link>
+                </Button>
+                <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+                  <Link href="/menu">View Menu</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
