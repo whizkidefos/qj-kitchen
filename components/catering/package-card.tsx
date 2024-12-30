@@ -9,12 +9,12 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Package } from "@/lib/catering-data";
+import { CateringPackage } from "@/lib/types/catering";
 import { formatPrice } from "@/lib/utils";
 
 interface PackageCardProps {
-  package: Package;
-  onSelect: (pkg: Package) => void;
+  package: CateringPackage;
+  onSelect: (pkg: CateringPackage) => void;
 }
 
 export function PackageCard({ package: pkg, onSelect }: PackageCardProps) {
@@ -34,28 +34,45 @@ export function PackageCard({ package: pkg, onSelect }: PackageCardProps) {
           <p className="text-muted-foreground">{pkg.description}</p>
         </div>
         <div className="mt-2">
-          <span className="text-3xl font-bold">{formatPrice(pkg.price)}</span>
+          <span className="text-3xl font-bold">{formatPrice(pkg.pricePerPerson)}</span>
           <span className="text-muted-foreground"> per person</span>
         </div>
       </CardHeader>
       <CardContent className="flex-1">
-        <div className="space-y-2">
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold mb-2">Menu Items</h4>
+            <ul className="space-y-2">
+              {pkg.items.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-green-500" />
+                  <span className="text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-2">Package Includes</h4>
+            <ul className="space-y-2">
+              {pkg.includes.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-green-500" />
+                  <span className="text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           <p className="text-sm text-muted-foreground">
-            {pkg.minGuests}-{pkg.maxGuests} guests
+            Minimum {pkg.minimumGuests} guests
           </p>
-          <ul className="space-y-2">
-            {pkg.includes.map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-500" />
-                <span className="text-sm">{item}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full" onClick={() => onSelect(pkg)}>
-          Book This Package
+        <Button
+          className="w-full"
+          onClick={() => onSelect(pkg)}
+        >
+          Book Now
         </Button>
       </CardFooter>
     </Card>

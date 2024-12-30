@@ -1,18 +1,20 @@
+export type MenuCategory = 'Rice Dishes' | 'Soups' | 'Stews' | 'Sides' | 'Grills'
+
 export interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-  unit: 'litre' | 'pack' | 'serving';
-  minimumOrder?: number;
-  available?: boolean;
+  id: string
+  name: string
+  description: string
+  price: number
+  image: string
+  category: MenuCategory
+  unit: 'portion' | 'piece'
+  minimumOrder?: number
+  available?: boolean
 }
 
-export interface MenuCategory {
-  id: string;
-  name: string;
-  description: string;
-  items: MenuItem[];
+export interface MenuSection {
+  id: string
+  name: string
+  description: string
+  items: MenuItem[]
 }

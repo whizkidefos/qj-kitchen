@@ -1,40 +1,94 @@
-import { MenuItem } from './types';
+import { MenuItem } from './types'
 
 export const menuItems: MenuItem[] = [
   {
     id: '1',
-    name: 'Beef Caldereta',
-    description: 'Tender beef stewed in tomato sauce with vegetables',
-    price: 450,
-    image: 'https://images.unsplash.com/photo-1574653853027-5382a3d23a15',
-    category: 'mains',
-    unit: 'litre'
+    name: 'Jollof Rice',
+    description: 'Classic Nigerian Jollof rice cooked with tomatoes and spices',
+    price: 1500,
+    image: '/images/menu/jollof-rice.jpg',
+    category: 'Rice Dishes',
+    unit: 'portion'
   },
   {
     id: '2',
-    name: 'Chicken Adobo',
-    description: 'Classic Filipino adobo with chicken and potatoes',
-    price: 400,
-    image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d',
-    category: 'mains',
-    unit: 'litre'
+    name: 'Fried Rice',
+    description: 'Nigerian style fried rice with mixed vegetables',
+    price: 1500,
+    image: '/images/menu/fried-rice.jpg',
+    category: 'Rice Dishes',
+    unit: 'portion'
   },
   {
     id: '3',
-    name: 'Sinigang na Baboy',
-    description: 'Sour soup with pork and vegetables',
-    price: 400,
-    image: 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f',
-    category: 'soups',
-    unit: 'litre'
+    name: 'Egusi Soup',
+    description: 'Traditional Nigerian soup made with ground melon seeds',
+    price: 2000,
+    image: '/images/menu/egusi-soup.jpg',
+    category: 'Soups',
+    unit: 'portion'
   },
   {
     id: '4',
-    name: 'Leche Flan',
-    description: 'Creamy caramel custard dessert',
-    price: 250,
-    image: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729',
-    category: 'desserts',
+    name: 'Okra Soup',
+    description: 'Fresh okra soup cooked with assorted meat and fish',
+    price: 1800,
+    image: '/images/menu/okra-soup.jpg',
+    category: 'Soups',
+    unit: 'portion'
+  },
+  {
+    id: '5',
+    name: 'Beef Stew',
+    description: 'Rich tomato-based stew with tender beef',
+    price: 2000,
+    image: '/images/menu/beef-stew.jpg',
+    category: 'Stews',
+    unit: 'portion'
+  },
+  {
+    id: '6',
+    name: 'Chicken Stew',
+    description: 'Delicious chicken stew in rich tomato sauce',
+    price: 1800,
+    image: '/images/menu/chicken-stew.jpg',
+    category: 'Stews',
+    unit: 'portion'
+  },
+  {
+    id: '7',
+    name: 'Moi Moi',
+    description: 'Steamed bean pudding with eggs and fish',
+    price: 500,
+    image: '/images/menu/moi-moi.jpg',
+    category: 'Sides',
+    unit: 'piece'
+  },
+  {
+    id: '8',
+    name: 'Plantain',
+    description: 'Fried ripe plantain',
+    price: 500,
+    image: '/images/menu/plantain.jpg',
+    category: 'Sides',
+    unit: 'portion'
+  },
+  {
+    id: '9',
+    name: 'Grilled Chicken',
+    description: 'Marinated and grilled chicken',
+    price: 1500,
+    image: '/images/menu/grilled-chicken.jpg',
+    category: 'Grills',
+    unit: 'piece'
+  },
+  {
+    id: '10',
+    name: 'Grilled Fish',
+    description: 'Whole grilled tilapia with spices',
+    price: 2000,
+    image: '/images/menu/grilled-fish.jpg',
+    category: 'Grills',
     unit: 'piece'
   }
-];
+]

@@ -2,6 +2,7 @@
 
 import { Menu, UtensilsCrossed, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -25,10 +26,18 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <UtensilsCrossed className="h-6 w-6" />
-            <span className="font-bold">QJ Kitchen</span>
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/QJKitchen.png"
+                alt="QJ Kitchen"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <span className="font-bold text-xl hidden sm:inline-block">QJ Kitchen</span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">

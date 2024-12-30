@@ -14,8 +14,8 @@ export const calculateVAT = (amount: number): number => {
 }
 
 export const calculateDeliveryFee = (subtotal: number): number => {
-  // Free delivery over £50
-  if (subtotal >= 50) return 0
+  // Free delivery over £100
+  if (subtotal >= 100) return 0
   // Standard delivery fee
-  return 5.00
+  return 10.00
 }

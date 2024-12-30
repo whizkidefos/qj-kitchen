@@ -23,19 +23,23 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { Package } from "@/lib/catering-data";
+import { Textarea } from "@/components/ui/textarea";
+import { CateringPackage } from "@/lib/types/catering";
 
 const formSchema = z.object({
   date: z.date({
     required_error: "Event date is required",
   }),
   guests: z.number().min(1, "Number of guests is required"),
-  eventType: z.string().min(1, "Event type is required"),
-  specialRequests: z.string().optional(),
+  venue: z.string().min(1, "Venue address is required"),
+  name: z.string().min(1, "Your name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(1, "Phone number is required"),
+  notes: z.string().optional(),
 });
 
 interface BookingFormProps {
-  selectedPackage: Package;
+  selectedPackage: CateringPackage;
   onClose: () => void;
 }
 
@@ -45,34 +49,45 @@ export function BookingForm({ selectedPackage, onClose }: BookingFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      guests: selectedPackage.minGuests,
-      eventType: "",
-      specialRequests: "",
+      guests: selectedPackage.minimumGuests,
+      venue: "",
+      name: "",
+      email: "",
+      phone: "",
+      notes: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    // Here you would typically submit the booking to your backend
-    console.log({ package: selectedPackage, ...values });
-    setIsLoading(false);
-    onClose();
+    try {
+      setIsLoading(true);
+      // Here you would typically send the booking data to your backend
+      console.log({
+        packageId: selectedPackage.id,
+        ...values,
+      });
+      onClose();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="date"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="flex flex-col">
               <FormLabel>Event Date</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant="outline"
+                      variant={"outline"}
                       className={cn(
                         "w-full pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground"
@@ -103,6 +118,7 @@ export function BookingForm({ selectedPackage, onClose }: BookingFormProps) {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="guests"
@@ -112,35 +128,92 @@ export function BookingForm({ selectedPackage, onClose }: BookingFormProps) {
               <FormControl>
                 <Input
                   type="number"
-                  min={selectedPackage.minGuests}
-                  max={selectedPackage.maxGuests}
+                  min={selectedPackage.minimumGuests}
                   {...field}
-                  onChange={(e) => field.onChange(parseInt(e.target.value))}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
-          name="eventType"
+          name="venue"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Event Type</FormLabel>
+              <FormLabel>Venue Address</FormLabel>
               <FormControl>
-                <Input placeholder="Wedding, Birthday, Corporate, etc." {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="flex gap-4">
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Submitting..." : "Book Now"}
-          </Button>
+
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Your Name</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="notes"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Special Requests</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex justify-end space-x-4">
           <Button type="button" variant="outline" onClick={onClose}>
             Cancel
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Submitting..." : "Book Now"}
           </Button>
         </div>
       </form>

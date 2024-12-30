@@ -1,16 +1,28 @@
-import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
+import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import { PWARegister } from '@/components/pwa-register';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'QJ Kitchen - Fresh Home-Cooked Meals & Catering',
-  description: 'Fresh home-cooked meals delivered in litres and food packs. Professional catering services for weddings, birthdays, and special events.',
+  title: 'QJ Kitchen - Fresh Home-Cooked Meals',
+  description: 'Fresh home-cooked meals delivered to your door',
+  manifest: '/manifest.json',
+  themeColor: '#000000',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'QJ Kitchen'
+  },
+  icons: {
+    icon: '/QJKitchen.png',
+    apple: '/QJKitchen.png',
+  },
 };
 
 export default function RootLayout({
@@ -20,12 +32,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="application-name" content="QJ Kitchen" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="QJ Kitchen" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Header />
-          <main className="flex-1 w-full mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">{children}</main>
-          <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
           <Toaster />
+          <PWARegister />
         </ThemeProvider>
       </body>
     </html>
